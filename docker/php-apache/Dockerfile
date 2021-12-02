@@ -6,6 +6,7 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		libicu-dev \
+        unzip \
         libpng-dev \
         libjpeg-dev \
         zlib1g-dev \
