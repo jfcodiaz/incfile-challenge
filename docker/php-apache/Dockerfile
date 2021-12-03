@@ -27,6 +27,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
                 xsl \
                 zip \
                 imap \
+                pdo_mysql \
             " \
 	&& docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp \
 	&& docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \

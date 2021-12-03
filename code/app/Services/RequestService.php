@@ -9,6 +9,8 @@ use Exception;
 class RequestService
 {
     /**
+    * Send a simple POST request to the urlEndpoint
+    *
     * @var string
     **/
     private $urlEndpoint;
