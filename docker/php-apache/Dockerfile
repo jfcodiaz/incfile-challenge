@@ -61,9 +61,10 @@ RUN a2enmod rewrite ssl headers proxy proxy_http
 RUN usermod -u 1000 www-data \
     && groupmod -g 1000 www-data
 
-RUN apt-get update && apt-get install -y ssh-client
+RUN apt-get update && apt-get install -y ssh-client supervisor
 
 WORKDIR "/var/www"
 
 EXPOSE 80
-ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+
+ENTRYPOINT ["/usr/bin/supervisord"]

@@ -15,6 +15,7 @@ services:
       - ./docker/config/apache/sites-enabled:/etc/apache2/sites-enabled
       - ./:/root/repository
       - ./code:/var/www
+      - ./docker/config/supervisor/config.d:/etc/supervisor/conf.d
   mysql:
     image: mysql:5.7
     ports:
