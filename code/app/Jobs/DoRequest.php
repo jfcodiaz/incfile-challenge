@@ -15,15 +15,16 @@ class DoRequest implements ShouldQueue
 
     public $tries = 3;
 
+    private $idRequest;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(int $idRequest)
     {
-        //
+        $this->idRequest = $idRequest;
     }
 
     /**
@@ -33,6 +34,6 @@ class DoRequest implements ShouldQueue
      */
     public function handle(RequestService $requestService)
     {
-        $requestService();
+        $requestService($this->idRequest);
     }
 }

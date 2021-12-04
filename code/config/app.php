@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\Repositories\IRequestRepositoryProvider;
 use App\Providers\RequestServiceProvider;
 
 return [
@@ -176,7 +177,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        RequestServiceProvider::class
+        RequestServiceProvider::class,
+        IRequestRepositoryProvider::class,
 
     ],
 

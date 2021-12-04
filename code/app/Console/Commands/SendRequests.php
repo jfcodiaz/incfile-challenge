@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Contracts\Repositories\IRequestRepository;
 use App\Jobs\DoRequest;
-use App\Services\RequestService;
 use Illuminate\Console\Command;
 
 class SendRequests extends Command
@@ -27,11 +27,11 @@ class SendRequests extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(IRequestRepository $requestRepository)
     {
         $nRequests = (int) $this->argument('nRequests');
         for ($i = 0; $i < $nRequests; $i++) {
-            DoRequest::dispatch();
+            DoRequest::dispatch($requestRepository->create()->id);
         }
 
         return Command::SUCCESS;
