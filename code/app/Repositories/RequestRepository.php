@@ -21,4 +21,19 @@ class RequestRepository implements IRequestRepository
     {
         return Request::find($id);
     }
+
+    public function getCount(): int
+    {
+        return Request::count();
+    }
+
+    public function getCountDelivereds(): int
+    {
+        return Request::where('status', Request::DELIVERED)->count();
+    }
+
+    public function getCountPendings(): int
+    {
+        return Request::where('status', '!=', Request::DELIVERED)->count();
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\Repositories\IRequestRepository;
+use App\Events\RequestDelivered;
 use DateTime;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Http;
@@ -33,8 +34,16 @@ class RequestService
         $request->status = $response->status();
         $request->delivered_at = $response->successful() ? new DateTime() : null;
         $request->save();
-        if (!$response->successful()) {
-            throw new Exception();
+
+        if ($response->successful()) {
+            RequestDelivered::dispatch(
+                $this->requestRepository->getCount(),
+                $this->requestRepository->getCountPendings(),
+                $this->requestRepository->getCountDelivereds()
+            );
+            return;
         }
+
+        throw new Exception();
     }
 }
