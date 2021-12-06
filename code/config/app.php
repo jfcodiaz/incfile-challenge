@@ -1,7 +1,10 @@
 <?php
 
-return [
+use App\Providers\Repositories\IRequestRepositoryProvider;
+use App\Providers\RequestServiceProvider;
 
+return [
+    'endpoint' => env('ENDPOINT'),
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -171,9 +174,11 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        RequestServiceProvider::class,
+        IRequestRepositoryProvider::class,
 
     ],
 
