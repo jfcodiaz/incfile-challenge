@@ -17,22 +17,12 @@ class DoRequest implements ShouldQueue
 
     private $idRequest;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
     public function __construct(int $idRequest)
     {
         $this->idRequest = $idRequest;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle(RequestService $requestService)
+    public function handle(RequestService $requestService) : void
     {
         $requestService($this->idRequest);
     }

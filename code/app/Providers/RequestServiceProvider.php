@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Contracts\Repositories\IRequestRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Services\RequestService;
+use App\Services\SendRequestNotifcationService;
 use Illuminate\Foundation\Application;
 
 class RequestServiceProvider extends ServiceProvider
@@ -14,9 +15,9 @@ class RequestServiceProvider extends ServiceProvider
         $this->app->singleton(RequestService::class, function (Application $app) {
             return new RequestService(
                 $app['config']['app.endpoint'],
-                $app->make(IRequestRepository::class)
+                $app->make(IRequestRepository::class),
+                $app->make(SendRequestNotifcationService::class)
             );
         });
     }
-
 }

@@ -18,11 +18,6 @@ class RequestDelivered implements ShouldBroadcast
     public $delivereds;
     public $total;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
     public function __construct(int $total, int $pendings, int $delivereds)
     {
         $this->total = $total;
@@ -30,11 +25,6 @@ class RequestDelivered implements ShouldBroadcast
         $this->pendings = $pendings;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
     public function broadcastOn(): Channel
     {
         return new Channel('channel-notifications');

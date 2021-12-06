@@ -8,17 +8,11 @@ use Illuminate\Support\ServiceProvider;
 
 class IRequestRepositoryProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
+    public function register(): void
     {
         $this->app->bind(
             IRequestRepository::class,
             RequestRepository::class
         );
     }
-
 }

@@ -7,7 +7,6 @@ use App\Models\Request;
 
 class RequestRepository implements IRequestRepository
 {
-
     public function create(): Request
     {
         $request = new Request();
@@ -17,7 +16,7 @@ class RequestRepository implements IRequestRepository
         return $request;
     }
 
-    public function getById($id): Request
+    public function getById(int $id): Request
     {
         return Request::find($id);
     }

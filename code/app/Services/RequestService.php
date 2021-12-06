@@ -11,24 +11,27 @@ use Exception;
 
 class RequestService
 {
-    /**
-    * Send a simple POST request to the urlEndpoint
-    *
-    * @var string
-    **/
     private $urlEndpoint;
 
     private $requestRepository;
 
-    public function __construct(string $urlEndpoint, IRequestRepository $requestRepository)
+    private $sendRequestNotication;
+
+    public function __construct(
+        string $urlEndpoint,
+        IRequestRepository $requestRepository,
+        SendRequestNotifcationService $sendRequestNotication
+    )
     {
         $this->urlEndpoint = $urlEndpoint;
         $this->requestRepository = $requestRepository;
+        $this->sendRequestNotication = $sendRequestNotication;
     }
 
     public function __invoke(int $idRequest): void
     {
         $request = $this->requestRepository->getById($idRequest);
+
         $response = Http::post($this->urlEndpoint);
 
         $request->status = $response->status();
@@ -36,11 +39,7 @@ class RequestService
         $request->save();
 
         if ($response->successful()) {
-            RequestDelivered::dispatch(
-                $this->requestRepository->getCount(),
-                $this->requestRepository->getCountPendings(),
-                $this->requestRepository->getCountDelivereds()
-            );
+            ($this->sendRequestNotication)();
             return;
         }
 

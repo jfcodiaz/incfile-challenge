@@ -14,3 +14,5 @@ yarn-error.log
 /.idea
 /.vscode
 .phpcs-cache
+/public/css/app.css
+/public/js/app.js

@@ -63,6 +63,20 @@ RUN usermod -u 1000 www-data \
 
 RUN apt-get update && apt-get install -y ssh-client supervisor
 
+# Install nvm/nodeJs
+RUN mkdir /root/.nvm
+ENV NVM_DIR /root/.nvm
+ENV NODE_VERSION 16.13.1
+
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+RUN chmod +x $HOME/.nvm/nvm.sh
+RUN . $HOME/.nvm/nvm.sh && nvm install $NODE_VERSION && nvm alias default $NODE_VERSION && nvm use default && npm install -g npm
+
+RUN ln -sf /root/.nvm/versions/node/v$NODE_VERSION/bin/node /usr/bin/nodejs
+RUN ln -sf /root/.nvm/versions/node/v$NODE_VERSION/bin/node /usr/bin/node
+RUN ln -sf /root/.nvm/versions/node/v$NODE_VERSION/bin/npm /usr/bin/npm
+
+
 WORKDIR "/var/www"
 
 EXPOSE 80
